@@ -1,0 +1,15 @@
+spring:
+  application: 
+    name: LMSCloud_Zuul
+server:
+  port: 8480
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+zuul:
+  routes: 
+    api:
+      strip-prefix: false
+      path: /api/*/**
+      service-id: api-main
