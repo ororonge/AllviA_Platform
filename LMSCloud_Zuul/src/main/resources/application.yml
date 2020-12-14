@@ -13,3 +13,7 @@ zuul:
       strip-prefix: false
       path: /api/*/**
       service-id: api-main
+      
+tomcat:
+  ajp:
+    port: 8488
