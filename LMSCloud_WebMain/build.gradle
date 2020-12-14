@@ -23,14 +23,14 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
 	
+	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
+	
 	compile   'org.springframework.cloud:spring-cloud-starter-openfeign'
-	compile  'javax.servlet:jstl'
 	compile  'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.1.4'
 	compile  'org.bgee.log4jdbc-log4j2:log4jdbc-log4j2-jdbc4.1:1.16'
 	compile  'org.mariadb.jdbc:mariadb-java-client:1.5.9'
-	
-	providedRuntime 'org.apache.tomcat.embed:tomcat-embed-jasper'
-	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
+	compile  'javax.servlet:jstl'
+	compile 'org.apache.tomcat.embed:tomcat-embed-jasper'
 	
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
