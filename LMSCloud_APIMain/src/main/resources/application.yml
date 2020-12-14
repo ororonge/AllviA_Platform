@@ -1,0 +1,38 @@
+spring:
+  application:
+    name: api-main
+  profiles:
+    active: dev
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari: 
+      minimumIdle: 5
+      maximumPoolSize: 20
+      idleTimeout: 30000
+      poolName: SpringBootJPAHikariCP
+      maxLifetime: 2000000
+      connectionTimeout: 30000
+
+log4jdbc:
+  drivers: org.mariadb.jdbc.Driver
+  spylogdelegator: 
+    name: net.sf.log4jdbc.log.slf4j.Slf4jSpyLogDelegator
+  dump: 
+    sql:
+      maxlinelength: 0
+
+mybatis: 
+  configuration: 
+    map-underscore-to-camel-case: true
+  config-location: mybatis/mybatis-config.xml
+
+tomcat: 
+  ajp: 
+    remoteauthentication: false
+    enabled: true
+        
+# -- Eureka client
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: ${EUREKA_URL:http://127.0.0.1:8761/eureka/}
