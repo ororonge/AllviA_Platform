@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.platform.api.mapper.CommonMapper">
+
+	<select id="selectExsistsTableYn" parameterType="map" resultType="string">
+		SELECT CASE WHEN EXISTS(SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = #{tableName}) THEN 'Y' ELSE 'N' END 
+	</select>
+	
+	<select id="selectTableDataList" parameterType="map" resultType="map">	 		
+		SELECT *
+		FROM ${tableName}
+		WHERE 1=1
+		<if test="pkInfoList != null and pkInfoList.size > 0">
+			<foreach item="pkInfo" collection="pkInfoList">
+				AND ${pkInfo.key} = #{pkInfo.val} 
+			 </foreach>
+		</if>
+		<if test="pkList != null and pkList.size > 0">
+			ORDER BY
+			<foreach item="pk" collection="pkList" separator=",">
+				${pk}
+			 </foreach>
+		</if>
+	</select>
+	
+	<select id="selectQuery" parameterType="map" resultType="map">	 		
+		${query}
+	</select>
+	
+</mapper>

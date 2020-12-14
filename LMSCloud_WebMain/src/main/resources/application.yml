@@ -1,0 +1,34 @@
+spring:
+  application:
+    name: web-main
+  profiles:
+    active: fel40
+  mvc: 
+    view: 
+      prefix: /WEB-INF/jsp/
+      suffix: .jsp
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari: 
+      minimumIdle: 5
+      maximumPoolSize: 20
+      idleTimeout: 30000
+      poolName: SpringBootJPAHikariCP
+      maxLifetime: 2000000
+      connectionTimeout: 30000
+
+mybatis: 
+  configuration: 
+    map-underscore-to-camel-case: true
+  config-location: mybatis/mybatis-config.xml
+
+tomcat: 
+  ajp: 
+    remoteauthentication: false
+    enabled: true
+      
+# -- Eureka client
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: ${EUREKA_URL:http://127.0.0.1:8761/eureka/}
