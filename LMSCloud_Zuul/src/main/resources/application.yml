@@ -11,9 +11,11 @@ zuul:
   routes: 
     api:
       strip-prefix: false
-      path: /api/*/**
+      path: /**
       service-id: api-main
       
 tomcat:
   ajp:
     port: 8488
+    remoteauthentication: false
+    enabled: true

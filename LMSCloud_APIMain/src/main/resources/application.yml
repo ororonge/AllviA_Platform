@@ -1,6 +1,4 @@
 spring:
-  application:
-    name: api-main
   profiles:
     active: dev
   datasource:
@@ -26,11 +24,6 @@ mybatis:
     map-underscore-to-camel-case: true
   config-location: mybatis/mybatis-config.xml
 
-tomcat: 
-  ajp: 
-    remoteauthentication: false
-    enabled: true
-        
 # -- Eureka client
 eureka:
   client:
