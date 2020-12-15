@@ -29,6 +29,10 @@ dependencyManagement {
 	}
 }
 
+bootJar {
+   archiveFileName = "${archiveBaseName.get()}_${version}.${archiveExtension.get()}"
+}
+
 test {
 	useJUnitPlatform()
 }
