@@ -27,9 +27,9 @@ mybatis:
 # -- Eureka client
 eureka:
   client: 
-    lease-renewal-interval-in-seconds: 1
-    lease-expiration-duration-in-seconds: 2
-    registry-fetch-interval-seconds: 3
+    #lease-renewal-interval-in-seconds: 1
+    #lease-expiration-duration-in-seconds: 2
+    #registry-fetch-interval-seconds: 3
     disable-delta: true
     serviceUrl:
       #defaultZone: ${EUREKA_URL:http://192.168.135.128:8761/eureka/}

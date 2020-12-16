@@ -5,7 +5,7 @@ server:
 # -- Eureka
 eureka:
   server:
-    #enable-self-preservation: false
+    enable-self-preservation: false
     eviction-interval-timer-in-ms: 60000
     response-cache-update-interval-ms: 3000
   instance:
@@ -13,5 +13,5 @@ eureka:
   client:
     serviceUrl:
       defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
-    #register-with-eureka: false
-    #fetch-registry: false
+    register-with-eureka: false
+    fetch-registry: false

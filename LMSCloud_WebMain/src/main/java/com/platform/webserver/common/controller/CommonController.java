@@ -1,4 +1,4 @@
-package com.platform.web.controller;
+package com.platform.webserver.common.controller;
 
 import java.util.HashMap;
 import java.util.List;
@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.platform.web.service.CommonService;
+import com.platform.webserver.common.service.CommonService;
 
 @Controller
 public class CommonController {

@@ -1,4 +1,4 @@
-package com.platform.web.service;
+package com.platform.webserver.common.service;
 
 import java.util.List;
 import java.util.Map;
@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.platform.web.mapper.CommonMapper;
+import com.platform.webserver.common.mapper.CommonMapper;
 
 @Service
 @Transactional

@@ -5,6 +5,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 @Mapper
-public class MemberMapper {
+public class ManageMemberMapper {
 
 }

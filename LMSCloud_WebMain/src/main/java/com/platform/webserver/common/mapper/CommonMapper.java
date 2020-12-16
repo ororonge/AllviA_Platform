@@ -1,4 +1,4 @@
-package com.platform.web.mapper;
+package com.platform.webserver.common.mapper;
 
 import java.util.List;
 import java.util.Map;
