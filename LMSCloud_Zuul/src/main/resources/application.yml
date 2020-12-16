@@ -1,4 +1,6 @@
 spring:
+  profiles:
+    active: real
   application: 
     name: LMSCloud_Zuul
 server:
@@ -6,7 +8,7 @@ server:
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://localhost:8761/eureka/
+      defaultZone: http://192.168.135.128:8761/eureka/
 zuul:
   routes: 
     api:

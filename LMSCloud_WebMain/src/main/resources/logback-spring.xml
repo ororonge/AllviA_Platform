@@ -4,8 +4,8 @@
 	<springProfile name="dev">
 		<property resource="logback-dev.properties" />
 	</springProfile>
-	<springProfile name="fel40">
-		<property resource="logback-fel40.properties" />
+	<springProfile name="real">
+		<property resource="logback-real.properties" />
 	</springProfile>
 	<!-- setting -->
 	
