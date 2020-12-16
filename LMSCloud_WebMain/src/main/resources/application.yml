@@ -2,7 +2,7 @@ spring:
   application:
     name: web-main
   profiles:
-    active: fel40
+    active: real
   mvc: 
     view: 
       prefix: /WEB-INF/jsp/
@@ -26,4 +26,5 @@ mybatis:
 eureka:
   client:
     serviceUrl:
-      defaultZone: ${EUREKA_URL:http://127.0.0.1:8761/eureka/}
+      #defaultZone: ${EUREKA_URL:http://127.0.0.1:8761/eureka/}
+      defaultZone: ${EUREKA_URL:http://192.168.135.128:8761/eureka/}

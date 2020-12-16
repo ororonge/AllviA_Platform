@@ -41,13 +41,13 @@ dependencyManagement {
 	}
 }
 
-bootWar {
+bootJar {
 	
-	archiveName 'LMSCloud_Web.war'
+	archiveFileName = "${archiveBaseName.get()}_${version}.${archiveExtension.get()}"
 	
 	// properties ¼³Á¤
     sourceSets {
-		ext.profile = (!project.hasProperty('profile') || !profile) ? 'dev' : profile
+		ext.profile = (!project.hasProperty('profile') || !profile) ? 'real' : profile
 		//println profile
         main {
             resources {
