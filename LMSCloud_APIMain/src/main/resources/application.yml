@@ -1,6 +1,4 @@
 spring:
-  profiles:
-    active: real
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
     hikari: 
@@ -37,6 +35,17 @@ eureka:
       defaultZone: ${EUREKA_URL:http://localhost:8761/eureka/}
       #defaultZone: http://localhost:8761/eureka/
       
+#beans       application의 전체 Spring beans를 출력
+#caches      사용가능한 cache를 노출
+#conditions  configuration 또는 auto-configuration 되는 class들의 성공 여부와 이유를 설명
+#env         Spring Boot의 현재 환경설정 정보(application.yml의 정보 등)를 출력
+#health      application의 현재 상태를 보여줍니다.
+#httptrace   http를 trace한 정보를 노출(기본적으로 최신 100건의 reqest-response를 보여줍니다.)
+#mappings    Request와 mapping되어있는 handler 정보를 가져옵니다.
+#sessions    Spring Session이 가지고 있는 정보를 가져옵니다.
+#threaddump  threaddump를 가져옴
+#logfile     log를 가져옵니다.
+#metrics     metrics 정보를 노출합니다.
 management:
   endpoint:
     shutdown:
@@ -45,7 +54,7 @@ management:
   endpoints:
     web:
       exposure:
-        include: shutdown,info
+        include: "*"
 ---
 spring:
     profiles: dev
