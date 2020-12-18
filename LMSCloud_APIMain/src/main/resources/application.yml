@@ -10,7 +10,8 @@ spring:
       poolName: SpringBootJPAHikariCP
       maxLifetime: 2000000
       connectionTimeout: 30000
-
+server:
+  port: ${PORT:8401}
 log4jdbc:
   drivers: org.mariadb.jdbc.Driver
   spylogdelegator: 
@@ -35,3 +36,23 @@ eureka:
       #defaultZone: ${EUREKA_URL:http://192.168.135.128:8761/eureka/}
       defaultZone: ${EUREKA_URL:http://localhost:8761/eureka/}
       #defaultZone: http://localhost:8761/eureka/
+      
+management:
+  endpoint:
+    shutdown:
+      enabled: true
+      sensitive: false #보안해제
+  endpoints:
+    web:
+      exposure:
+        include: shutdown,info
+---
+spring:
+    profiles: dev
+server:
+    port: ${PORT:8401}
+---
+spring:
+    profiles: real
+server:
+    port: ${PORT:8401}

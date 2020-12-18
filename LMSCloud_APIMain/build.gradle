@@ -21,6 +21,7 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.cloud:spring-cloud-starter'
 	implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
+	implementation 'org.springframework.boot:spring-boot-starter-actuator'
 	
 	compile  'javax.servlet:jstl'
 	compile  'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.1.4'

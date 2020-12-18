@@ -5,7 +5,7 @@ server:
 # -- Eureka
 eureka:
   server:
-    enable-self-preservation: false
+    #enable-self-preservation: false
     eviction-interval-timer-in-ms: 60000
     response-cache-update-interval-ms: 3000
   instance:
