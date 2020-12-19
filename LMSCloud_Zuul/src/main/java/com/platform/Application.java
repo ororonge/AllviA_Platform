@@ -8,8 +8,8 @@ import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
 @EnableZuulProxy
 @EnableDiscoveryClient
 @SpringBootApplication
-public class LmsCloudZuulApplication {
+public class Application {
 	public static void main(String[] args) {
-		SpringApplication.run(LmsCloudZuulApplication.class, args);
+		SpringApplication.run(Application.class, args);
 	}
 }
