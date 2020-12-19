@@ -1,38 +1,28 @@
 spring:
-  application: 
-    name: zuul
-  datasource:
-    type: com.zaxxer.hikari.HikariDataSource
-    hikari: 
-      minimumIdle: 5
-      maximumPoolSize: 20
-      idleTimeout: 30000
-      poolName: SpringBootJPAHikariCP
-      maxLifetime: 2000000
-      connectionTimeout: 30000
+  application:
+    name: authenticationservice
+  profiles:
+    active: real
+  mvc: 
+    view: 
+      prefix: /WEB-INF/jsp/
+      suffix: .jsp
+  cloud:
+    config:
+      enabled: true
+      
 eureka:
+  instance:
+    preferIpAddress: true
   client:
+    registerWithEureka: true
+    fetchRegistry: true
     serviceUrl:
-      defaultZone: ${EUREKA_URL:http://localhost:8761/eureka/}
-zuul:
-  routes: 
-    api-main:
-      strip-prefix: false
-      path: /**
-      service-id: api-main
-    web-main:
-      strip-prefix: false
-      path: /**
-      service-id: web-main
-    authenticationservice:
-      strip-prefix: false
-      path: /**
-      service-id: authenticationservice 
-mybatis: 
-  configuration: 
-    map-underscore-to-camel-case: true
-  config-location: mybatis/mybatis-config.xml
-
+        defaultZone: ${EUREKA_URL:http://localhost:8761/eureka/}
+server:
+  servlet:
+    contextPath: /auth
+      
 #beans       application의 전체 Spring beans를 출력
 #caches      사용가능한 cache를 노출
 #conditions  configuration 또는 auto-configuration 되는 class들의 성공 여부와 이유를 설명

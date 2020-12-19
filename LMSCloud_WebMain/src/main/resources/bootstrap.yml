@@ -1,4 +1,6 @@
 spring:
+  profiles:
+    active: real
   application:
     name: web-main
   mvc: 

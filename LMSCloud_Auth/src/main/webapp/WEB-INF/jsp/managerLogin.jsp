@@ -2,13 +2,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
 	<form method="post">
-		ID : <input type="text" name="username" />
-		PW : <input type="password" name="password" />
+		<input type="text" name="username" />
+		<input type="password" name="password" />
 	</form>
 </body>
 </html>

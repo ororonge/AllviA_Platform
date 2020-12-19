@@ -1,0 +1,12 @@
+server:
+  port: ${PORT:8180}
+---
+spring:
+  profiles: dev
+server:
+  port: ${PORT:8180}
+---
+spring:
+  profiles: real
+server:
+  port: ${PORT:8180}
