@@ -2,7 +2,9 @@ package com.platform.authentication.authorization;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Component;
 
+@Component
 public class PlatformPasswordEncoder implements PasswordEncoder {
 	private PasswordEncoder passwordEncoder;
 

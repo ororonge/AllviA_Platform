@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.savedrequest.HttpSessionRequestCache;
@@ -27,7 +28,7 @@ public class AuthenticationHandler implements AuthenticationSuccessHandler, Auth
 	private static final Logger log = LoggerFactory.getLogger(AuthenticationHandler.class);
 
 	@Autowired
-	private PlatformUserDetailsService userDetailsService;
+	private UserDetailsService userDetailsService;
 	
 	@Override
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {

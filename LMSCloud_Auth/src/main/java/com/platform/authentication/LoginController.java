@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.platform.authentication.authorization.PlatformUserDetails;
-import com.platform.authentication.authorization.PlatformUserDetailsService;
 import com.platform.authentication.token.CookieUtil;
 import com.platform.authentication.token.JwtUtil;
 import com.platform.authentication.token.RedisUtil;
@@ -24,7 +24,7 @@ import io.micrometer.core.ipc.http.HttpSender.Response;
 public class LoginController {
 	
 	@Autowired
-	private PlatformUserDetailsService platformUserDetailsService;
+	private UserDetailsService platformUserDetailsService;
 	
 	@Autowired
 	private JwtUtil jwtUtil;
