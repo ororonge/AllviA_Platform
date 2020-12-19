@@ -9,7 +9,7 @@ tomcat:
 spring:
     profiles: dev
 server:
-    port: ${PORT:8421}
+    port: ${PORT:8480}
 tomcat:
   ajp:
     port: 8488
@@ -19,7 +19,7 @@ tomcat:
 spring:
     profiles: real
 server:
-    port: ${PORT:8421}
+    port: ${PORT:8480}
 tomcat:
   ajp:
     port: 8488

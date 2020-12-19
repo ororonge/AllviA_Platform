@@ -11,9 +11,16 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
         http
             .authorizeRequests()
             .antMatchers("/api/**")
-            .hasRole("ADMIN")
+            .hasRole("HEAD_ADMIN")
             .anyRequest()
             .authenticated()
-            .and().formLogin().loginPage("/login").defaultSuccessUrl("/main", true);
+            .and()
+            .authorizeRequests()
+            .antMatchers("/api/**")
+            .hasRole("FRANCHISE_ADMIN")
+            .anyRequest()
+            .authenticated()
+            .and()
+            .formLogin().loginPage("/login").defaultSuccessUrl("/main", true);
     }
 }
