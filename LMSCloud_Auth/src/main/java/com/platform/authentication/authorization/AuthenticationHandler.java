@@ -23,6 +23,7 @@ import org.springframework.security.web.savedrequest.RequestCache;
 import org.springframework.security.web.savedrequest.SavedRequest;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.platform.authentication.model.ManagementLoginDTO;
 
 public class AuthenticationHandler implements AuthenticationSuccessHandler, AuthenticationFailureHandler {
 	private static final Logger log = LoggerFactory.getLogger(AuthenticationHandler.class);
@@ -49,8 +50,8 @@ public class AuthenticationHandler implements AuthenticationSuccessHandler, Auth
 				details = user;
 			}
 		}
-		if(details instanceof ManagementUser) {
-			ManagementUser userDetails = (ManagementUser) details;
+		if(details instanceof ManagementLoginDTO) {
+			ManagementLoginDTO userDetails = (ManagementLoginDTO) details;
 			map.put("name", userDetails.getUserNm());
 			map.put("icon", userDetails.getPicPath());
 		}

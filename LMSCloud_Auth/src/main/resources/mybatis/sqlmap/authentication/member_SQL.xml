@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.platform.authentication.mapper.ManageMemberMapper">
-	<select id="selectUserMstMng" parameterType="string" resultType="com.platform.authentication.authorization.ManagementUser">
+	
+	<select id="selectUserMstMng" parameterType="string" resultType="com.platform.authentication.model.ManagementLoginDTO">
 		 SELECT USER_IDX
 			  , USER_ID
 			  , PWD
@@ -29,4 +30,11 @@
 		FROM  USER_MST_MNG
 		WHERE USER_ID = #{userId}
 	</select>
+
+	<select id="selectUserMstMngAuthority" parameterType="string" resultType="com.platform.authentication.authorization.PlatformGrantedAuthority">
+		SELECT AUTHORITY
+		FROM  USER_MST_MNG_AUTHORITY
+		WHERE USER_ID = #{userId}
+	</select>
+
 </mapper>

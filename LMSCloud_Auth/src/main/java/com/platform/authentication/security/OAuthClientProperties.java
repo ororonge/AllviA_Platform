@@ -4,7 +4,7 @@ public class OAuthClientProperties {
 	private String clientId;
     private String clientSecret;
     private String[] scopes;
-    private String authorizedGrandTypes;
+    private String[] authorizedGrandTypes;
 
     public String getClientId () {
         return clientId;
@@ -24,11 +24,10 @@ public class OAuthClientProperties {
     public void setScopes ( String[]  scopes ) {
         this.scopes = scopes;
     }
-    public String getAuthorizedGrandTypes () {
-        return authorizedGrandTypes;
-    }
-    public void setAuthorizedGrandTypes ( String authorizedGrandTypes ) {
-        this.authorizedGrandTypes = authorizedGrandTypes;
-    }
-
+	public String[] getAuthorizedGrandTypes() {
+		return authorizedGrandTypes;
+	}
+	public void setAuthorizedGrandTypes(String... authorizedGrandTypes) {
+		this.authorizedGrandTypes = authorizedGrandTypes;
+	}
 }

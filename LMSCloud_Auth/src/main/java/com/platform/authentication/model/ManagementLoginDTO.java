@@ -1,14 +1,18 @@
-package com.platform.authentication.authorization;
+package com.platform.authentication.model;
 
 import java.util.List;
 
 import org.springframework.security.core.userdetails.UserDetails;
 
-public class ManagementUser implements UserDetails {
+import com.platform.authentication.authorization.PlatformGrantedAuthority;
+
+public class ManagementLoginDTO implements UserDetails {
 	private static final long serialVersionUID = -1690504269499001239L;
 	private String userIdx;
 	private String userId;
+	private String username;
 	private String pwd;
+	private String password;
 	private String userNm;
 	private String authCd;
 	private String picPath;
@@ -30,7 +34,7 @@ public class ManagementUser implements UserDetails {
 	private String stAddr1;
 	private String lastDate;
 	private String lastIp;
-	private String userLoginNotAllow;
+	private String userLoginNotAllowYn;
 	private boolean isAccountNonExpired = true;
 	private boolean isAccountNonLocked = true;
 	private boolean isCredentialsNonExpired = true;
@@ -87,6 +91,14 @@ public class ManagementUser implements UserDetails {
 
 	public void setUserNm(String userNm) {
 		this.userNm = userNm;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	public String getAuthCd() {
@@ -249,12 +261,12 @@ public class ManagementUser implements UserDetails {
 		this.lastIp = lastIp;
 	}
 
-	public String getUserLoginNotAllow() {
-		return userLoginNotAllow;
+	public String getUserLoginNotAllowYn() {
+		return userLoginNotAllowYn;
 	}
 
-	public void setUserLoginNotAllow(String userLoginNotAllow) {
-		this.userLoginNotAllow = userLoginNotAllow;
+	public void setUserLoginNotAllowYn(String userLoginNotAllowYn) {
+		this.userLoginNotAllowYn = userLoginNotAllowYn;
 	}
 
 	@Override
@@ -264,12 +276,12 @@ public class ManagementUser implements UserDetails {
 
 	@Override
 	public String getPassword() {
-		return pwd;
+		return password;
 	}
 
 	@Override
 	public String getUsername() {
-		return userId;
+		return username;
 	}
 	
 	@Override
