@@ -22,8 +22,7 @@ import com.platform.authentication.security.AuthServerProperties;
 @EnableResourceServer
 @EnableAuthorizationServer
 @EnableConfigurationProperties(AuthServerProperties.class)
-//@EnableAutoConfiguration(exclude={DataSourceAutoConfiguration.class})
-//@ComponentScan({"com.platform"})
+//curl -u head-admin:allvia-seckey-v0.0.1-head-admin http://localhost:8480/auth/oauth/token -d "grant_type=password&scope=webclient&username=testadmin&password=q12345"
 public class Application {
     @RequestMapping(value = { "/user" }, produces = "application/json")
     public Map<String, Object> user(OAuth2Authentication user) {
