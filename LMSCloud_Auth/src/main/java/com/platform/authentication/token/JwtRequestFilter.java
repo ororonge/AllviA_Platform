@@ -15,7 +15,7 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import com.platform.authentication.authorization.PlatformUserDetails;
+import com.platform.authentication.authorization.ManagementUser;
 
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.io.IOException;
@@ -77,7 +77,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
                     usernamePasswordAuthenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(httpServletRequest));
                     SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
 
-                    PlatformUserDetails member = new PlatformUserDetails();
+                    ManagementUser member = new ManagementUser();
                     member.setUserNm(refreshUname);
                     String newToken = jwtUtil.generateToken(member);
 

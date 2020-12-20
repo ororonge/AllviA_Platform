@@ -1,5 +1,9 @@
 package com.platform.common.config;
 
+import java.io.FileInputStream;
+import java.io.InputStream;
+import java.util.Properties;
+
 import javax.sql.DataSource;
 
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -31,38 +35,42 @@ public class DatabaseConfiguration {
 	public HikariConfig hikariConfig() {
 		return new HikariConfig();
 	}
-
+	
 	@Bean
 	public DataSource dataSource() {
 		return new HikariDataSource(hikariConfig());
 	}
+	
+	@Bean
+	@ConfigurationProperties(prefix = "mybatis.configuration")
+	public org.apache.ibatis.session.Configuration mybatisConfg() {
+		return new org.apache.ibatis.session.Configuration();
+	}
 
 	@Bean
 	public SqlSessionFactory sqlSessionFactory() throws Exception {
+		Properties props = new Properties();
+		props.setProperty("mapUnderscoreToCamelCase", "true");
 		
 //		org.apache.ibatis.session.Configuration configuration = new org.apache.ibatis.session.Configuration();
 //	    configuration.setMapUnderscoreToCamelCase(true);
 //	    configuration.setJdbcTypeForNull(JdbcType.NULL);
 //	    configuration.setLogImpl(org.apache.ibatis.logging.log4j.Log4jImpl.class);//use log4j log
-		
 		SqlSessionFactoryBean factoryBean = new SqlSessionFactoryBean();
 		factoryBean.setDataSource(dataSource());
 		factoryBean.setMapperLocations(applicationContext.getResources("classpath:/mybatis/sqlmap/authentication/*_SQL.xml"));
 //		factoryBean.setMapperLocations(applicationContext.getResources("classpath:/mybatis/sqlmap/api/*/*_SQL.xml"));
-//		factoryBean.setConfigLocation(applicationContext.getResource("classpath:/mybatis/mybatis-config.xml"));
+//		factoryBean.setConfigLocation(applicationContext.getResource("classpath:/mybatis-config.xml"));
 		factoryBean.setConfiguration(mybatisConfg());
+//		org.springframework.core.io.Resource myBatisConfig = new PathMatchingResourcePatternResolver().getResource("classpath:mybatis/mybatis-config.xml");
+//		factoryBean.setConfigLocation(myBatisConfig);
+		
 		return factoryBean.getObject();
 	}
 
 	@Bean
 	public SqlSessionTemplate sqlSession() throws Exception {
 		return new SqlSessionTemplate(sqlSessionFactory());
-	}
-
-	@Bean
-	@ConfigurationProperties(prefix = "mybatis.configuration")
-	public org.apache.ibatis.session.Configuration mybatisConfg() {
-		return new org.apache.ibatis.session.Configuration();
 	}
 
 	@Bean

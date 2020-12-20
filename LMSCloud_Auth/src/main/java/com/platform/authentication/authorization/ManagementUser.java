@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.security.core.userdetails.UserDetails;
 
-public class PlatformUserDetails implements UserDetails {
+public class ManagementUser implements UserDetails {
 	private static final long serialVersionUID = -1690504269499001239L;
 	private String userIdx;
 	private String userId;

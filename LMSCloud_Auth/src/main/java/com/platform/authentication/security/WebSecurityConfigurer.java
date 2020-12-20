@@ -16,6 +16,11 @@ import com.platform.authentication.authorization.PlatformPasswordEncoder;
 @EnableWebSecurity
 @Configuration
 public class WebSecurityConfigurer extends WebSecurityConfigurerAdapter {
+	
+    @Autowired
+    @Qualifier("platformUserDetailsService")
+    private UserDetailsService userDetailsService;
+    
     @Override
     @Bean
     public AuthenticationManager authenticationManagerBean() throws Exception {
@@ -28,11 +33,6 @@ public class WebSecurityConfigurer extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth
-        .inMemoryAuthentication()
-        .passwordEncoder(encoder)
-        .withUser("a").password(encoder.encode("test")).roles("USER")
-        .and()
-        .withUser("b").password(encoder.encode("test")).roles("USER", "ADMIN");
+        auth.userDetailsService(userDetailsService).passwordEncoder(encoder);
     }
 }

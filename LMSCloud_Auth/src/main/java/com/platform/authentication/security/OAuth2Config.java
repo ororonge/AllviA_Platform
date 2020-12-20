@@ -26,11 +26,6 @@ public class OAuth2Config extends AuthorizationServerConfigurerAdapter {
     @Qualifier("platformPasswordEncoder")
     private PasswordEncoder encoder;
 	
-//	@Override
-//	public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
-//		endpoints.authenticationManager(authenticationManager).userDetailsService(userDetailsService);
-//	}
-	
 	@Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
         endpoints

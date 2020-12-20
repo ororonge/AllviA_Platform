@@ -49,8 +49,8 @@ public class AuthenticationHandler implements AuthenticationSuccessHandler, Auth
 				details = user;
 			}
 		}
-		if(details instanceof PlatformUserDetails) {
-			PlatformUserDetails userDetails = (PlatformUserDetails) details;
+		if(details instanceof ManagementUser) {
+			ManagementUser userDetails = (ManagementUser) details;
 			map.put("name", userDetails.getUserNm());
 			map.put("icon", userDetails.getPicPath());
 		}

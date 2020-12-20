@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.platform.authentication.authorization.PlatformUserDetails;
+import com.platform.authentication.authorization.ManagementUser;
 import com.platform.authentication.token.CookieUtil;
 import com.platform.authentication.token.JwtUtil;
 import com.platform.authentication.token.RedisUtil;
@@ -42,7 +42,7 @@ public class LoginController {
     }
 	
 	@PostMapping("/login")
-    public Response login(@RequestBody PlatformUserDetails user,
+    public Response login(@RequestBody ManagementUser user,
                           HttpServletRequest req,
                           HttpServletResponse res) {
         try {
