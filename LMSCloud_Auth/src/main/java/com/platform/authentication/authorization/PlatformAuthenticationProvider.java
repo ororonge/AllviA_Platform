@@ -10,9 +10,12 @@ import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
 import com.platform.authentication.model.ManagementLoginDTO;
+import com.platform.authentication.token.CookieUtil;
+import com.platform.authentication.token.JwtUtil;
 import com.platform.authentication.token.RedisTokenUtil;
 
 @Component
@@ -23,6 +26,9 @@ public class PlatformAuthenticationProvider implements AuthenticationProvider {
 	
     @Autowired
     private PlatformPasswordEncoder encoder;
+    
+    @Autowired
+    private CookieUtil cookieUtil;
     
     @Autowired
     private RedisTokenUtil redisTokenUtil;
@@ -45,7 +51,7 @@ public class PlatformAuthenticationProvider implements AuthenticationProvider {
 		List<PlatformGrantedAuthority> roles = member.getAuthorities();
 		// 스프링 시큐리티 내부 클래스로 인증 토큰 생성
 		UsernamePasswordAuthenticationToken result = new UsernamePasswordAuthenticationToken(member_username, member_pwd, roles);
-		redisTokenUtil.authorization(member);
+		SecurityContextHolder.getContext().setAuthentication(result);
 		return result;
 	}
  

@@ -19,9 +19,9 @@ eureka:
     fetchRegistry: true
     serviceUrl:
         defaultZone: ${EUREKA_URL:http://localhost:8761/eureka/}
-#server:
-#  servlet:
-#    contextPath: /auth
+server:
+  servlet:
+    contextPath: /auth
       
 #beans       application의 전체 Spring beans를 출력
 #caches      사용가능한 cache를 노출

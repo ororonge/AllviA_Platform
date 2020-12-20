@@ -6,13 +6,17 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
 import com.platform.authentication.authorization.PlatformAuthenticationProvider;
 import com.platform.authentication.authorization.PlatformUserDetailsService;
+import com.platform.authentication.filter.CustomBasicAuthenticationFilter;
+import com.platform.authentication.filter.TokenAuthenticationFilter;
 
 @EnableWebSecurity
 @Configuration
@@ -44,5 +48,16 @@ public class WebSecurityConfigurer extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.authenticationProvider(authenticationProvider).userDetailsService(userDetailsService);
+    }
+    
+    @Override
+    protected void configure(final HttpSecurity http) throws Exception {
+        //Implementing Token based authentication in this filter
+        final TokenAuthenticationFilter tokenFilter = new TokenAuthenticationFilter();
+        http.addFilterBefore(tokenFilter, BasicAuthenticationFilter.class);
+
+        //Creating token when basic authentication is successful and the same token can be used to authenticate for further requests
+        final CustomBasicAuthenticationFilter customBasicAuthFilter = new CustomBasicAuthenticationFilter(this.authenticationManager() );
+        http.addFilter(customBasicAuthFilter);
     }
 }
