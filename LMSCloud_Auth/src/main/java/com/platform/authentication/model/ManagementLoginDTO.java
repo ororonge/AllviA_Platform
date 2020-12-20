@@ -10,9 +10,7 @@ public class ManagementLoginDTO implements UserDetails {
 	private static final long serialVersionUID = -1690504269499001239L;
 	private String userIdx;
 	private String userId;
-	private String username;
 	private String pwd;
-	private String password;
 	private String userNm;
 	private String authCd;
 	private String picPath;
@@ -39,6 +37,8 @@ public class ManagementLoginDTO implements UserDetails {
 	private boolean isAccountNonLocked = true;
 	private boolean isCredentialsNonExpired = true;
 	private boolean isEnabled;
+	private String username;
+	private String password;
 	
 	public void setAccountNonExpired(boolean isAccountNonExpired) {
 		this.isAccountNonExpired = isAccountNonExpired;
@@ -75,6 +75,7 @@ public class ManagementLoginDTO implements UserDetails {
 
 	public void setUserId(String userId) {
 		this.userId = userId;
+		this.username = userId;
 	}
 
 	public String getPwd() {
@@ -83,6 +84,7 @@ public class ManagementLoginDTO implements UserDetails {
 
 	public void setPwd(String pwd) {
 		this.pwd = pwd;
+		this.password = pwd;
 	}
 
 	public String getUserNm() {
@@ -91,14 +93,6 @@ public class ManagementLoginDTO implements UserDetails {
 
 	public void setUserNm(String userNm) {
 		this.userNm = userNm;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
 	}
 
 	public String getAuthCd() {
@@ -268,6 +262,16 @@ public class ManagementLoginDTO implements UserDetails {
 	public void setUserLoginNotAllowYn(String userLoginNotAllowYn) {
 		this.userLoginNotAllowYn = userLoginNotAllowYn;
 	}
+	
+	public void setUsername(String username) {
+		this.userId = username;
+		this.username = username;
+	}
+
+	public void setPassword(String password) {
+		this.pwd = password;
+		this.password = password;
+	}
 
 	@Override
 	public List<PlatformGrantedAuthority> getAuthorities() {
@@ -276,12 +280,12 @@ public class ManagementLoginDTO implements UserDetails {
 
 	@Override
 	public String getPassword() {
-		return password;
+		return pwd;
 	}
 
 	@Override
 	public String getUsername() {
-		return username;
+		return userId;
 	}
 	
 	@Override

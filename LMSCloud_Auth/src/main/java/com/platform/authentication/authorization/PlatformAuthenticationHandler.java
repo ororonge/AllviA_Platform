@@ -11,25 +11,26 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.savedrequest.HttpSessionRequestCache;
 import org.springframework.security.web.savedrequest.RequestCache;
 import org.springframework.security.web.savedrequest.SavedRequest;
+import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.platform.authentication.model.ManagementLoginDTO;
 
-public class AuthenticationHandler implements AuthenticationSuccessHandler, AuthenticationFailureHandler {
-	private static final Logger log = LoggerFactory.getLogger(AuthenticationHandler.class);
+@Component
+public class PlatformAuthenticationHandler implements AuthenticationSuccessHandler, AuthenticationFailureHandler, AccessDeniedHandler {
+	private static final Logger log = LoggerFactory.getLogger(PlatformAuthenticationHandler.class);
 
-	@Autowired
-	private UserDetailsService userDetailsService;
+    @Value("${spring.security.error.403.url}")
+    private String web403ErrorUrl;
 	
 	@Override
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
@@ -45,21 +46,8 @@ public class AuthenticationHandler implements AuthenticationSuccessHandler, Auth
 		if(details instanceof String) {
 			map.put("name", (String) details);
 			map.put("username", (String) details);
-			UserDetails user = userDetailsService.loadUserByUsername((String) details);
-			if(user != null) {
-				details = user;
-			}
 		}
-		if(details instanceof ManagementLoginDTO) {
-			ManagementLoginDTO userDetails = (ManagementLoginDTO) details;
-			map.put("name", userDetails.getUserNm());
-			map.put("icon", userDetails.getPicPath());
-		}
-		if(details instanceof UserDetails) {
-			UserDetails userDetails = (UserDetails) details;
-			map.put("username", userDetails.getUsername());
-		}
-		
+
 		log.debug("User : {}", map);
 		
 		// {"success" : true, "returnUrl" : "..."}
@@ -101,4 +89,9 @@ public class AuthenticationHandler implements AuthenticationSuccessHandler, Auth
 		out.write(jsonString.getBytes());
 	}
 
+	@Override
+	public void handle(HttpServletRequest request, HttpServletResponse response,
+			AccessDeniedException accessDeniedException) throws IOException, ServletException {
+		response.sendRedirect(web403ErrorUrl);
+	}
 }

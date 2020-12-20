@@ -5,8 +5,9 @@ import java.security.Key;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
+
+import com.platform.authentication.model.ManagementLoginDTO;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
@@ -20,8 +21,8 @@ public class JwtUtil {
     public final static long TOKEN_VALIDATION_SECOND = 1000L * 10;
     public final static long REFRESH_TOKEN_VALIDATION_SECOND = 1000L * 60 * 24 * 2;
 
-    final static public String ACCESS_TOKEN_NAME = "accessToken";
-    final static public String REFRESH_TOKEN_NAME = "refreshToken";
+    final static public String ACCESS_TOKEN_NAME = "allvia-platform-access-token";
+    final static public String REFRESH_TOKEN_NAME = "allvia-platform-refresh-token";
 
     @Value("${spring.jwt.secret}")
     private String SECRET_KEY;
@@ -39,7 +40,7 @@ public class JwtUtil {
                 .getBody();
     }
     
-    public String getUsername(String token) {
+    public String getUserId(String token) {
         return extractAllClaims(token).get("username", String.class);
     }
 
@@ -48,12 +49,12 @@ public class JwtUtil {
         return expiration.before(new Date());
     }
 
-    public String generateToken(UserDetails member) {
-        return doGenerateToken(member.getUsername(), TOKEN_VALIDATION_SECOND);
+    public String generateToken(ManagementLoginDTO member) {
+        return doGenerateToken(member.getUserId(), TOKEN_VALIDATION_SECOND);
     }
 
-    public String generateRefreshToken(UserDetails member) {
-        return doGenerateToken(member.getUsername(), REFRESH_TOKEN_VALIDATION_SECOND);
+    public String generateRefreshToken(ManagementLoginDTO member) {
+        return doGenerateToken(member.getUserId(), REFRESH_TOKEN_VALIDATION_SECOND);
     }
 
     public String doGenerateToken(String username, long expireTime) {
@@ -71,9 +72,9 @@ public class JwtUtil {
         return jwt;
     }
 
-    public Boolean validateToken(String token, UserDetails userDetails) {
-        final String username = getUsername(token);
+    public Boolean validateToken(String token, ManagementLoginDTO userDetails) {
+        final String username = getUserId(token);
 
-        return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
+        return (username.equals(userDetails.getUserId()) && !isTokenExpired(token));
     }
 }
