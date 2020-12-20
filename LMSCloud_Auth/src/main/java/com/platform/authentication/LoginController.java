@@ -23,9 +23,8 @@ public class LoginController {
 	private SecurityComponent securityComponent;
 	
 	@GetMapping(value = { "/auth/managerLogin", "/managerLogin" })
-    public ModelAndView login() {
-		ModelAndView mav = new ModelAndView("auth/managerLogin");
-        return mav;
+    public String login() {
+        return "managerLogin";
     }
 	
 //	@PostMapping("/login")
@@ -56,9 +55,13 @@ public class LoginController {
     }
 	
 	@RequestMapping(value="/error/web403Error", method=RequestMethod.GET)
-    public ModelAndView web403Error(HttpServletRequest req, HttpServletResponse res) {
+    public String web403Error(HttpServletRequest req, HttpServletResponse res) {
 		System.out.println(securityComponent.getUserId());
-		ModelAndView mav = new ModelAndView("error/web403Error");
-        return mav;
+        return "error/web403Error";
+    }
+	
+	@RequestMapping(value="/common/NewFile", method=RequestMethod.GET)
+    public String NewFile(HttpServletRequest req, HttpServletResponse res) {
+        return "common/NewFile";
     }
 }

@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.platform.api.member.model.ManageMember;
 
 @RestController
-@RequestMapping(value = "/api/member/manage")
 public class ManageMemberController {
 	@GetMapping("/memberList")
 	public List<ManageMember> memberList(@RequestParam(value = "userId", defaultValue = "", required=false) String userId) {
@@ -26,7 +25,7 @@ public class ManageMemberController {
 		return resultList;
 	}
 	
-	@GetMapping("/test")
+	@GetMapping("/api/member/manage/memberList")
 	public List<ManageMember> test(@RequestParam(value = "userId", defaultValue = "", required=false) String userId) {
 		List<ManageMember> resultList = new ArrayList<ManageMember>();
 		for (int i = 0; i < 5; i++) {
