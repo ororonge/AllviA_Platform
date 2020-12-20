@@ -24,7 +24,7 @@ zuul:
       strip-prefix: false
       path: /**
       service-id: web-main
-    authenticationservice:
+    auth-main:
       strip-prefix: false
       path: /**
       service-id: authenticationservice 

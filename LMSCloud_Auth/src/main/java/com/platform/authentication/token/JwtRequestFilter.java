@@ -17,7 +17,6 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import com.platform.authentication.model.ManagementLoginDTO;
 
 import io.jsonwebtoken.ExpiredJwtException;
-import io.jsonwebtoken.io.IOException;
 
 @Component
 public class JwtRequestFilter extends OncePerRequestFilter {
@@ -32,7 +31,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 	private RedisTokenUtil redisTokenUtil;
 
 	@Override
-	protected void doFilterInternal(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, FilterChain filterChain) throws ServletException, IOException {
+	protected void doFilterInternal(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, FilterChain filterChain) throws ServletException {
 
 		final Cookie jwtToken = cookieUtil.getCookie(httpServletRequest, JwtUtil.ACCESS_TOKEN_NAME);
 		String jwt = null;

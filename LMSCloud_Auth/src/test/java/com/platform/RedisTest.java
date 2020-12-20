@@ -138,7 +138,8 @@ public class RedisTest {
 	    System.out.println("entries = " + entries.get("Hello2"));
 	    
 	    if (entries.get("Hello3") instanceof java.util.List) {
-	    	List<String> testList = (List<String>)entries.get("Hello3");
+	    	@SuppressWarnings("unchecked")
+			List<String> testList = (List<String>)entries.get("Hello3");
 	    	for (String data : testList) {
 	    		System.out.println(data);
 	    	}

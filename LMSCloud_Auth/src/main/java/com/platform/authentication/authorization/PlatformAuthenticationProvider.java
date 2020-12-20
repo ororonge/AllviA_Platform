@@ -4,14 +4,12 @@ import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import com.platform.authentication.model.ManagementLoginDTO;
@@ -24,8 +22,7 @@ public class PlatformAuthenticationProvider implements AuthenticationProvider {
 	private PlatformUserDetailsService userDetailsService;
 	
     @Autowired
-    @Qualifier("platformPasswordEncoder")
-    private PasswordEncoder encoder;
+    private PlatformPasswordEncoder encoder;
     
     @Autowired
     private RedisTokenUtil redisTokenUtil;

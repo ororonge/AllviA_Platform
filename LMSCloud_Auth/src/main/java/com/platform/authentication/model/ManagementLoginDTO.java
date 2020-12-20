@@ -280,12 +280,12 @@ public class ManagementLoginDTO implements UserDetails {
 
 	@Override
 	public String getPassword() {
-		return pwd;
+		return password;
 	}
 
 	@Override
 	public String getUsername() {
-		return userId;
+		return username;
 	}
 	
 	@Override

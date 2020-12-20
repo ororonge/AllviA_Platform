@@ -3,6 +3,10 @@ spring:
     name: authenticationservice
   profiles:
     active: real
+  mvc: 
+    view: 
+      prefix: /WEB-INF/jsp/
+      suffix: .jsp
   cloud:
     config:
       enabled: true
