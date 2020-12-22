@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.security.core.userdetails.UserDetails;
 
-import com.platform.common.security.authorization.PlatformGrantedAuthority;
+import com.platform.common.security.authorization.CustomGrantedAuthority;
 
 public class ManagementLoginDTO implements UserDetails {
 	private static final long serialVersionUID = -1690504269499001239L;
@@ -56,8 +56,8 @@ public class ManagementLoginDTO implements UserDetails {
 		this.isEnabled = isEnabled;
 	}
 
-	private List<PlatformGrantedAuthority> authorities;
-	public void setAuthorities(List<PlatformGrantedAuthority> authorities) {
+	private List<CustomGrantedAuthority> authorities;
+	public void setAuthorities(List<CustomGrantedAuthority> authorities) {
 		this.authorities = authorities;
 	}
 
@@ -274,7 +274,7 @@ public class ManagementLoginDTO implements UserDetails {
 	}
 
 	@Override
-	public List<PlatformGrantedAuthority> getAuthorities() {
+	public List<CustomGrantedAuthority> getAuthorities() {
 		return authorities;
 	}
 

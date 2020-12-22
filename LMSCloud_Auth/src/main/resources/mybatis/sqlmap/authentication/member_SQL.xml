@@ -31,7 +31,7 @@
 		WHERE USER_ID = #{userId}
 	</select>
 
-	<select id="selectUserMstMngAuthority" parameterType="string" resultType="com.platform.authentication.authorization.PlatformGrantedAuthority">
+	<select id="selectUserMstMngAuthority" parameterType="string" resultType="com.platform.authentication.authorization.CustomGrantedAuthority">
 		SELECT AUTHORITY
 		FROM  USER_MST_MNG_AUTHORITY
 		WHERE USER_ID = #{userId}

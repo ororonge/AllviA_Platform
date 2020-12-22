@@ -1,8 +1,8 @@
-package com.platform.authentication.authorization;
+package com.platform.common.security.authorization;
 
 import org.springframework.security.core.GrantedAuthority;
 
-public class PlatformGrantedAuthority implements GrantedAuthority {
+public class CustomGrantedAuthority implements GrantedAuthority {
 	private static final long serialVersionUID = -7221947049086733413L;
 	private String authority;
 	public void setAuthority(String authority) {

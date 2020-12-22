@@ -9,7 +9,7 @@ import com.platform.authentication.mapper.ManageMemberMapper;
 import com.platform.authentication.model.ManagementLoginDTO;
 
 @Service
-public class PlatformUserDetailsService implements UserDetailsService {
+public class CustomUserDetailsService implements UserDetailsService {
 
 	@Autowired
     private ManageMemberMapper manageMemberMapper;
