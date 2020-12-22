@@ -46,12 +46,10 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 			throw new DisabledException(member_username);
 		}
         
-		List<CustomGrantedAuthority> roles = member.getAuthorities();
-		
 		String token = redisTokenUtil.authorization(member);
 		
 		// 스프링 시큐리티 내부 클래스로 인증 토큰 생성
-		UsernamePasswordAuthenticationToken result = new UsernamePasswordAuthenticationToken(token, token, roles);
+		CustomBearerTokenAuthenticationToken result = new CustomBearerTokenAuthenticationToken(token);
 		
 		SecurityContextHolder.getContext().setAuthentication(result);
 		

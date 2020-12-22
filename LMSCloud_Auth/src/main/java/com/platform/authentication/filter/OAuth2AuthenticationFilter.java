@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -27,9 +26,7 @@ public class OAuth2AuthenticationFilter extends AbstractAuthenticationProcessing
         Optional tokenParam = Optional.ofNullable(httpServletRequest.getHeader("Authorization")); //Authorization: Bearer TOKEN
         String token= httpServletRequest.getHeader("Authorization");
         token= StringUtils.removeStart(token, "Bearer").trim();
-        Authentication requestAuthentication = new UsernamePasswordAuthenticationToken(token, token);
-        return getAuthenticationManager().authenticate(requestAuthentication);
-
+        return SecurityContextHolder.getContext().getAuthentication();
     }
 
     @Override
