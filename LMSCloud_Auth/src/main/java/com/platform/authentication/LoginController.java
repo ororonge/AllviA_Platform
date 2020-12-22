@@ -4,15 +4,41 @@ import java.util.Collection;
 
 import javax.annotation.Resource;
 
+import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.collections.MapUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.context.annotation.Bean;
 import org.springframework.security.oauth2.common.OAuth2AccessToken;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-//@RequestMapping(value="auth")
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.platform.authentication.model.ManagementLoginDTO;
+
 @Controller
 public class LoginController {
+	
+    @Bean(name="manageUserInfo")
+    public ManagementLoginDTO manageUserInfo() {
+    	ManagementLoginDTO userData = new ManagementLoginDTO();
+    	Collection<OAuth2AccessToken> tokenList = tokenStore.findTokensByClientIdAndUserName("head-admin", "testadmin");
+    	if (CollectionUtils.isEmpty(tokenList)) {
+    		return userData;
+    	}
+    	ObjectMapper objectMapper = new ObjectMapper();
+    	for (OAuth2AccessToken token : tokenList) {
+    		if (MapUtils.isEmpty(token.getAdditionalInformation())) {
+    			continue;
+    		}
+    		try {
+    			userData = objectMapper.convertValue(token.getAdditionalInformation(), ManagementLoginDTO.class);	
+			} catch (Exception e) {
+			}
+    	}
+    	return StringUtils.isEmpty(userData.getUserId()) ? new ManagementLoginDTO() : userData;
+    }
 	
 	@Resource(name="customRedisTokenStore")
 	private TokenStore tokenStore;
@@ -20,10 +46,7 @@ public class LoginController {
 	@GetMapping("/authmain")
     public ModelAndView main() {
 		ModelAndView mav = new ModelAndView("authmain");
-		Collection<OAuth2AccessToken> tokenList = tokenStore.findTokensByClientIdAndUserName("head-admin", "testadmin");
-		for (OAuth2AccessToken token : tokenList) {
-			System.out.println(token.getAdditionalInformation());
-		}
+		ManagementLoginDTO userData = manageUserInfo();
         return mav;
     }
 	
