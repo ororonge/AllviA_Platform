@@ -40,6 +40,7 @@ public class ManagementLoginDTO implements UserDetails {
 	private String username;
 	private String password;
 	private String securityToken;
+	private String jwtToken;
 	private String oauth2Token;
 	
 	public void setAccountNonExpired(boolean isAccountNonExpired) {
@@ -316,6 +317,14 @@ public class ManagementLoginDTO implements UserDetails {
 
 	public void setSecurityToken(String securityToken) {
 		this.securityToken = securityToken;
+	}
+
+	public String getJwtToken() {
+		return jwtToken;
+	}
+
+	public void setJwtToken(String jwtToken) {
+		this.jwtToken = jwtToken;
 	}
 
 	public String getOauth2Token() {

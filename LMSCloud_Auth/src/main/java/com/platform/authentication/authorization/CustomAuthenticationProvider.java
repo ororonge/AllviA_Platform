@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.DisabledException;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -40,10 +41,11 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 		}
         
 		String token = redisTokenUtil.authorization(member);
+		member.setJwtToken(token);
 		
 		// 스프링 시큐리티 내부 클래스로 인증 토큰 생성
-		CustomBearerTokenAuthenticationToken result = new CustomBearerTokenAuthenticationToken(token);
-		
+//		CustomBearerTokenAuthenticationToken result = new CustomBearerTokenAuthenticationToken(token);
+		UsernamePasswordAuthenticationToken result = new UsernamePasswordAuthenticationToken(member, token, member.getAuthorities());
 		SecurityContextHolder.getContext().setAuthentication(result);
 		
 		return result;

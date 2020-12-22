@@ -67,9 +67,10 @@ public class OAuth2Config implements AuthorizationServerConfigurer {
 
 	@Override
 	public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
-		final OAuth2AuthenticationFilter filter = new OAuth2AuthenticationFilter(PROTECTED_URLS);
-		filter.setAuthenticationManager(authenticationManager);
-		security.allowFormAuthenticationForClients().addTokenEndpointAuthenticationFilter(filter);
+		// 여기 주석 풀면 filter 걸림 filter 말고 provider로 구현함
+//		final OAuth2AuthenticationFilter filter = new OAuth2AuthenticationFilter(PROTECTED_URLS);
+//		filter.setAuthenticationManager(authenticationManager);
+//		security.allowFormAuthenticationForClients().addTokenEndpointAuthenticationFilter(filter);
 //		security.allowFormAuthenticationForClients().addTokenEndpointAuthenticationFilter(new JwtRequestFilter());
 	}
 }
