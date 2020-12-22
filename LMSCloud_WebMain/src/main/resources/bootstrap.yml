@@ -27,7 +27,11 @@ eureka:
     serviceUrl:
       defaultZone: ${EUREKA_URL:http://localhost:8761/eureka/}
       #defaultZone: ${EUREKA_URL:http://192.168.135.128:8761/eureka/}
-      
+server:
+  servlet:
+    contextPath: /lms
+    #address: 127.0.0.1
+    
 #beans       application의 전체 Spring beans를 출력
 #caches      사용가능한 cache를 노출
 #conditions  configuration 또는 auto-configuration 되는 class들의 성공 여부와 이유를 설명
@@ -48,5 +52,3 @@ management:
     web:
       exposure:
         include: "*"
-server:
-  address: 127.0.0.1

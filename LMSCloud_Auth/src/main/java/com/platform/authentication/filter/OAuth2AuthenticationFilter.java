@@ -1,7 +1,6 @@
 package com.platform.authentication.filter;
 
 import java.io.IOException;
-import java.util.Optional;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -44,7 +43,6 @@ public class OAuth2AuthenticationFilter extends AbstractAuthenticationProcessing
 //    	  System.out.print(name + " : " + httpServletRequest.getHeader(name) + "     "); 
 //    	}
 //    	System.out.println(cookieUtil.getCookie(httpServletRequest, JwtUtil.ACCESS_TOKEN_NAME));;
-
     	String token = httpServletRequest.getHeader("Authorization");
         if (token.startsWith("Bearer")) {
         	token = StringUtils.removeStart(token, "Bearer").trim();	
