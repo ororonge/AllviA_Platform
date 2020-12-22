@@ -11,6 +11,8 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.platform.authentication.model.ManagementLoginDTO;
 import com.platform.authentication.token.RedisTokenUtil;
 
@@ -40,13 +42,13 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 			throw new DisabledException(member_username);
 		}
         
-		String token = redisTokenUtil.authorization(member);
-		member.setJwtToken(token);
+//		String token = redisTokenUtil.authorization(member);
+//		member.setJwtToken(token);
 		
 		// 스프링 시큐리티 내부 클래스로 인증 토큰 생성
 //		CustomBearerTokenAuthenticationToken result = new CustomBearerTokenAuthenticationToken(token);
-		UsernamePasswordAuthenticationToken result = new UsernamePasswordAuthenticationToken(member, token, member.getAuthorities());
-		SecurityContextHolder.getContext().setAuthentication(result);
+		UsernamePasswordAuthenticationToken result = new UsernamePasswordAuthenticationToken(member, member_username, member.getAuthorities());
+//		SecurityContextHolder.getContext().setAuthentication(result);
 		
 		return result;
 	}

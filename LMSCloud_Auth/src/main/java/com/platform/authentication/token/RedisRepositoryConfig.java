@@ -22,7 +22,7 @@ public class RedisRepositoryConfig {
     @Bean
     public RedisConnectionFactory redisConnectionFactory() {
     	RedisStandaloneConfiguration config = new RedisStandaloneConfiguration(redisHost, redisPort);
-    	config.setPassword(RedisPassword.of("visang!dhfqldkPlatform"));
+    	config.setPassword(RedisPassword.of("visangdhfqldkPlatform"));
         return new LettuceConnectionFactory(config);
     }
 

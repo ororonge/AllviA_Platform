@@ -23,6 +23,10 @@ public class ResourceServerConfiguration implements ResourceServerConfigurer {
 	@Value("${aplication.name:web-main}")
 	private String resourceId;
 	
+	private final String[] PATH_PERMIT_ALL = new String[] {
+		"/lms/managerLogin"
+	};
+	
     @Autowired
 	private PlatformAuthenticationHandler platformAuthenticationHandler;
 
@@ -33,8 +37,20 @@ public class ResourceServerConfiguration implements ResourceServerConfigurer {
 
 	@Override
 	public void configure(HttpSecurity http) throws Exception {
+//		http.authorizeRequests()
+//			.antMatchers(PATH_PERMIT_ALL).permitAll()
+//	        .and()
+//	        .formLogin().loginPage("/managerLogin").failureUrl("/managerLogin?error").usernameParameter("username").passwordParameter("password")
+//	        .successHandler(platformAuthenticationHandler).failureHandler(platformAuthenticationHandler)
+//	        .and()
+//	        .logout().logoutSuccessUrl("/managerLogin?logout")
+//	        .and()
+//	        .exceptionHandling().accessDeniedPage("/403")
+//	        .and()
+//	        .csrf().disable();
 		http.authorizeRequests()
-			.antMatchers("/managerLogin").permitAll()
+			.antMatchers(PATH_PERMIT_ALL).permitAll()
+//			.anyRequest().authenticated()
 	        .and()
 	        .formLogin().loginPage("/managerLogin").failureUrl("/managerLogin?error").usernameParameter("username").passwordParameter("password")
 	        .successHandler(platformAuthenticationHandler).failureHandler(platformAuthenticationHandler)

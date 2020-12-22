@@ -1,6 +1,11 @@
 package com.platform.authentication;
 
-import org.springframework.security.core.context.SecurityContextHolder;
+import java.util.Collection;
+
+import javax.annotation.Resource;
+
+import org.springframework.security.oauth2.common.OAuth2AccessToken;
+import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -9,13 +14,16 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class LoginController {
 	
-//	@Autowired
-//	private SecurityComponent securityComponent;
+	@Resource(name="customRedisTokenStore")
+	private TokenStore tokenStore;
 //	@Secured("ROLE_TEST")
 	@GetMapping("/authmain")
     public ModelAndView main() {
 		ModelAndView mav = new ModelAndView("authmain");
-		String currentUser = SecurityContextHolder.getContext().getAuthentication().getName();
+		Collection<OAuth2AccessToken> tokenList = tokenStore.findTokensByClientIdAndUserName("head-admin", "testadmin");
+		for (OAuth2AccessToken token : tokenList) {
+			System.out.println(token.getAdditionalInformation());
+		}
         return mav;
     }
 	
