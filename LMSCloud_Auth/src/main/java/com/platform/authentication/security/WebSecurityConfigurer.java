@@ -30,7 +30,7 @@ public class WebSecurityConfigurer extends WebSecurityConfigurerAdapter {
     
     @Override
 	public void configure(WebSecurity web) throws Exception {
-    	web.ignoring().antMatchers("/login");
+    	web.ignoring().antMatchers("/jwt/token","/login", "/images/**", "/js/**");
 	}
     
 //    /**
@@ -47,8 +47,6 @@ public class WebSecurityConfigurer extends WebSecurityConfigurerAdapter {
 ////                .antMatchers("/spiters/me").authenticated()
 ////                .antMatchers(HttpMethod.POST,".spittles").authenticated()
 ////                .anyRequest().permitAll();
-//        http
-//        .authorizeRequests()
-//            .antMatchers("/auth/login").permitAll();
-//        }
+//        http.authorizeRequests().antMatchers("/login", "/js/**", "/images/**", "/css/**").permitAll();
+//    }
 }

@@ -1,19 +1,46 @@
 package com.platform.authentication;
 
-import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
+import java.util.Base64;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.commons.collections.MapUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.http.HttpHeaders;
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.ResponseHandler;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.BasicResponseHandler;
+import org.apache.http.impl.client.HttpClientBuilder;
+import org.apache.http.message.BasicNameValuePair;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.platform.authentication.filter.OAuth2AuthenticationFilter;
 import com.platform.authentication.model.ManagementLoginDTO;
 import com.platform.authentication.util.JwtUtil;
 
 @Controller
 public class LoginController {
+	
+	private static final Logger LOGGER = LoggerFactory.getLogger(LoginController.class);
 	
 	@Autowired
     private JwtUtil jwtUtil;
@@ -56,6 +83,46 @@ public class LoginController {
     public ModelAndView login() {
 		ModelAndView mav = new ModelAndView("login");
         return mav;
+    }
+	
+	@SuppressWarnings("unchecked")
+	@PostMapping("/jwt/token/login")
+	@ResponseBody
+    public Map<String, Object> jwtToken(@RequestParam Map<String, Object> requestMap, HttpServletRequest request, HttpServletResponse response2) {
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		List<NameValuePair> formparams = new ArrayList<NameValuePair>();
+		formparams.add(new BasicNameValuePair("grant_type", "password"));
+		formparams.add(new BasicNameValuePair("scope", "webclient"));
+		formparams.add(new BasicNameValuePair("username", "testadmin"));
+		formparams.add(new BasicNameValuePair("password", "q12345"));
+		String encoding = Base64.getEncoder().encodeToString(("head-admin" + ":" + "allvia-seckey-v0.0.1-head-admin").getBytes());
+		HttpClient client = HttpClientBuilder.create().build(); // HttpClient 积己
+		HttpPost postRequest = new HttpPost("http://localhost:8180/oauth/token"); //POST 皋家靛 URL 货己 
+		postRequest.setHeader("Accept", "application/json");
+		postRequest.setHeader("Content-Type", "application/x-www-form-urlencoded");
+		postRequest.setHeader(HttpHeaders.AUTHORIZATION, "Basic " + encoding);
+		try {
+			postRequest.setEntity(new UrlEncodedFormEntity(formparams, "UTF-8"));
+			HttpResponse response = client.execute(postRequest);
+			//Response 免仿
+			if (response.getStatusLine().getStatusCode() == 200) {
+				ResponseHandler<String> handler = new BasicResponseHandler();
+				String body = handler.handleResponse(response);
+				ObjectMapper mapper = new ObjectMapper();
+				resultMap = mapper.readValue(body, Map.class);
+				LOGGER.info(body);
+			} else {
+				LOGGER.error("response is error : " + response.getStatusLine().getStatusCode());
+			}
+		} catch (Exception e){
+			LOGGER.error(e.toString());
+		}
+		if (MapUtils.isEmpty(resultMap)) {
+			resultMap.put("RESULT_CODE", "401");
+			resultMap.put("RESULT_MESSAGE", "ERROR");
+			return resultMap;
+		}
+		return resultMap;
     }
 	
 //	@PostMapping("/login")
