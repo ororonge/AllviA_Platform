@@ -86,9 +86,10 @@ public class LoginController {
     }
 	
 	@SuppressWarnings("unchecked")
-	@PostMapping("/jwt/token/login")
+	@PostMapping("/jwt/create_token")
 	@ResponseBody
     public Map<String, Object> jwtToken(@RequestParam Map<String, Object> requestMap, HttpServletRequest request, HttpServletResponse response2) {
+		String uri = request.getScheme() + "://" + request.getServerName()+ ":" + request.getServerPort();
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 		List<NameValuePair> formparams = new ArrayList<NameValuePair>();
 		formparams.add(new BasicNameValuePair("grant_type", "password"));
@@ -97,7 +98,7 @@ public class LoginController {
 		formparams.add(new BasicNameValuePair("password", "q12345"));
 		String encoding = Base64.getEncoder().encodeToString(("head-admin" + ":" + "allvia-seckey-v0.0.1-head-admin").getBytes());
 		HttpClient client = HttpClientBuilder.create().build(); // HttpClient 积己
-		HttpPost postRequest = new HttpPost("http://localhost:8180/oauth/token"); //POST 皋家靛 URL 货己 
+		HttpPost postRequest = new HttpPost(uri + "/oauth/token"); //POST 皋家靛 URL 货己 
 		postRequest.setHeader("Accept", "application/json");
 		postRequest.setHeader("Content-Type", "application/x-www-form-urlencoded");
 		postRequest.setHeader(HttpHeaders.AUTHORIZATION, "Basic " + encoding);

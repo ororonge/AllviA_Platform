@@ -30,7 +30,7 @@ public class WebSecurityConfigurer extends WebSecurityConfigurerAdapter {
     
     @Override
 	public void configure(WebSecurity web) throws Exception {
-    	web.ignoring().antMatchers("/jwt/token","/login", "/images/**", "/js/**");
+    	web.ignoring().antMatchers("/jwt/create_token","/login", "/images/**", "/js/**");
 	}
     
 //    /**
