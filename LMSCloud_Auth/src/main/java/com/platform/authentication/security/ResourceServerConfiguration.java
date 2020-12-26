@@ -13,13 +13,13 @@ public class ResourceServerConfiguration implements ResourceServerConfigurer {
 	@Value("${resource.id:authenticationservice}")
 	private String resourceId;
 	
-//    // 모든 권한
-//    private final String[] PUBLIC_RESOURCES = new String[]{
-//    	
-//    };
-//    // 특정 권한
-//    private final String[] PRIVATE_RESOURCES = new String[]{
-//    };
+    // 모든 권한
+    private final String[] PUBLIC_RESOURCES = new String[]{
+    	"/auth/login"
+    };
+    // 특정 권한
+    private final String[] PRIVATE_RESOURCES = new String[]{
+    };
 	
 	@Override
 	public void configure(ResourceServerSecurityConfigurer resources) {
@@ -28,8 +28,8 @@ public class ResourceServerConfiguration implements ResourceServerConfigurer {
 
 	@Override
 	public void configure(HttpSecurity http) throws Exception {
-//		http.authorizeRequests().antMatchers(PUBLIC_RESOURCES).permitAll();
-//		http.authorizeRequests().antMatchers(PRIVATE_RESOURCES).hasRole("HEAD_ADMIN");
+		http.authorizeRequests().antMatchers(PUBLIC_RESOURCES).permitAll();
+		http.authorizeRequests().antMatchers(PRIVATE_RESOURCES).hasRole("HEAD_ADMIN");
 		http.authorizeRequests().anyRequest().authenticated();
 		http.csrf().disable();
 	}

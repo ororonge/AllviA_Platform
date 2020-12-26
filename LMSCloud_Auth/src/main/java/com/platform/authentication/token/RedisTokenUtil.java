@@ -14,6 +14,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.platform.authentication.model.ManagementLoginDTO;
+import com.platform.authentication.util.JwtUtil;
 
 @Component
 public class RedisTokenUtil {

@@ -3,6 +3,8 @@ package com.platform.authentication.token;
 import org.apache.commons.lang.ArrayUtils;
 import org.springframework.stereotype.Service;
 
+import com.platform.authentication.util.JwtUtil;
+
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 

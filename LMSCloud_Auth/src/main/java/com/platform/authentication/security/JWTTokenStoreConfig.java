@@ -16,7 +16,7 @@ public class JWTTokenStoreConfig {
     @Value("${spring.jwt.secret}")
     private String SECRET_KEY;
 
-    @Bean
+    @Bean(name="customJwtTokenStore")
     public TokenStore tokenStore() {
         return new JwtTokenStore(jwtAccessTokenConverter());
     }
@@ -31,7 +31,7 @@ public class JWTTokenStoreConfig {
     }
 
 
-    @Bean
+    @Bean(name="customJwtAccessTokenConverter")
     public JwtAccessTokenConverter jwtAccessTokenConverter() {
         JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
         converter.setSigningKey(SECRET_KEY);

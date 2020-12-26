@@ -1,52 +1,54 @@
 package com.platform.authentication;
 
-import java.util.Collection;
+import javax.servlet.http.HttpServletRequest;
 
-import javax.annotation.Resource;
-
-import org.apache.commons.collections.CollectionUtils;
-import org.apache.commons.collections.MapUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.context.annotation.Bean;
-import org.springframework.security.oauth2.common.OAuth2AccessToken;
-import org.springframework.security.oauth2.provider.token.TokenStore;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.platform.authentication.model.ManagementLoginDTO;
+import com.platform.authentication.util.JwtUtil;
 
 @Controller
 public class LoginController {
 	
-    @Bean(name="manageUserInfo")
-    public ManagementLoginDTO manageUserInfo() {
-    	ManagementLoginDTO userData = new ManagementLoginDTO();
-    	Collection<OAuth2AccessToken> tokenList = tokenStore.findTokensByClientIdAndUserName("head-admin", "testadmin");
-    	if (CollectionUtils.isEmpty(tokenList)) {
-    		return userData;
-    	}
-    	ObjectMapper objectMapper = new ObjectMapper();
-    	for (OAuth2AccessToken token : tokenList) {
-    		if (MapUtils.isEmpty(token.getAdditionalInformation())) {
-    			continue;
-    		}
-    		try {
-    			userData = objectMapper.convertValue(token.getAdditionalInformation(), ManagementLoginDTO.class);	
-			} catch (Exception e) {
-			}
-    	}
-    	return StringUtils.isEmpty(userData.getUserId()) ? new ManagementLoginDTO() : userData;
-    }
+	@Autowired
+    private JwtUtil jwtUtil;
 	
-	@Resource(name="customRedisTokenStore")
-	private TokenStore tokenStore;
+//	@Resource(name="customRedisTokenStore")
+//	private TokenStore tokenStore;
+//    @Bean(name="manageUserInfo")
+//    public ManagementLoginDTO manageUserInfo() {
+//    	ManagementLoginDTO userData = new ManagementLoginDTO();
+//    	Collection<OAuth2AccessToken> tokenList = tokenStore.findTokensByClientIdAndUserName("head-admin", "testadmin");
+//    	if (CollectionUtils.isEmpty(tokenList)) {
+//    		return userData;
+//    	}
+//    	ObjectMapper objectMapper = new ObjectMapper();
+//    	for (OAuth2AccessToken token : tokenList) {
+//    		if (MapUtils.isEmpty(token.getAdditionalInformation())) {
+//    			continue;
+//    		}
+//    		try {
+//    			userData = objectMapper.convertValue(token.getAdditionalInformation(), ManagementLoginDTO.class);	
+//			} catch (Exception e) {
+//			}
+//    	}
+//    	return StringUtils.isEmpty(userData.getUserId()) ? new ManagementLoginDTO() : userData;
+//    }
+	
 //	@Secured("ROLE_TEST")
 	@GetMapping("/authmain")
-    public ModelAndView main() {
+    public ModelAndView main(HttpServletRequest req, Authentication authentication) {
 		ModelAndView mav = new ModelAndView("authmain");
-		ManagementLoginDTO userData = manageUserInfo();
+		String token = req.getHeader("Authorization");
+		token = StringUtils.trim(StringUtils.replace(token, "Bearer", ""));
+		String userId = jwtUtil.getUserId(token);
+//		ManagementLoginDTO userData = manageUserInfo();
+		ManagementLoginDTO userData = (ManagementLoginDTO) authentication.getPrincipal();;
         return mav;
     }
 	

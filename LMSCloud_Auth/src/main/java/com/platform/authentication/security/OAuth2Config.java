@@ -3,7 +3,6 @@ package com.platform.authentication.security;
 import org.apache.commons.lang3.ArrayUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -24,7 +23,7 @@ import org.springframework.security.oauth2.provider.token.store.redis.RedisToken
 import com.platform.authentication.authorization.CustomPasswordEncoder;
 import com.platform.authentication.authorization.CustomTokenEnhancer;
 
-@Configuration /*JWTOAuth2Config 사용*/
+//@org.springframework.context.annotation.Configuration/*JWTOAuth2Config 사용*/
 public class OAuth2Config extends AuthorizationServerConfigurerAdapter {
 
 	@Autowired

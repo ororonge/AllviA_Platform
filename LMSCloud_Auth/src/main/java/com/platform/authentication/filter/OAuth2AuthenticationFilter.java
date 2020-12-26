@@ -22,7 +22,7 @@ import org.springframework.security.web.util.matcher.RequestMatcher;
 
 import com.platform.authentication.model.ManagementLoginDTO;
 import com.platform.authentication.token.CookieUtil;
-import com.platform.authentication.token.JwtUtil;
+import com.platform.authentication.util.JwtUtil;
 
 public class OAuth2AuthenticationFilter extends AbstractAuthenticationProcessingFilter {
 

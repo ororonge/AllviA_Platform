@@ -1,4 +1,4 @@
-package com.platform.authentication.token;
+package com.platform.authentication.util;
 
 import java.nio.charset.StandardCharsets;
 import java.security.Key;
@@ -41,7 +41,7 @@ public class JwtUtil {
     }
     
     public String getUserId(String token) {
-        return extractAllClaims(token).get("username", String.class);
+        return extractAllClaims(token).get("userId", String.class);
     }
 
     public Boolean isTokenExpired(String token) {
