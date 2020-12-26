@@ -14,14 +14,14 @@ import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.platform.authentication.security.AuthServerProperties;
+import com.platform.authentication.security.OAuth2ServerProperties;
 
 @SpringBootApplication
 @RestController
 @EnableEurekaClient
 @EnableResourceServer
 @EnableAuthorizationServer
-@EnableConfigurationProperties(AuthServerProperties.class)
+@EnableConfigurationProperties(OAuth2ServerProperties.class)
 //curl -u head-admin:allvia-seckey-v0.0.1-head-admin http://localhost:8480/auth/oauth/token -d "grant_type=password&scope=webclient&username=testadmin&password=q12345"
 public class Application {
     @RequestMapping(value = { "/user" }, produces = "application/json")

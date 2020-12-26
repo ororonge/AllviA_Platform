@@ -30,7 +30,7 @@ public class WebSecurityConfigurer extends WebSecurityConfigurerAdapter {
     
     @Override
 	public void configure(WebSecurity web) throws Exception {
-    	web.ignoring().antMatchers("/auth/authmain");
+//    	web.ignoring().antMatchers("/auth/authmain");
 	}
     
     /**

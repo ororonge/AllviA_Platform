@@ -24,11 +24,11 @@ import org.springframework.security.oauth2.provider.token.store.redis.RedisToken
 import com.platform.authentication.authorization.CustomPasswordEncoder;
 import com.platform.authentication.authorization.CustomTokenEnhancer;
 
-@Configuration
+@Configuration /*JWTOAuth2Config »ç¿ë*/
 public class OAuth2Config extends AuthorizationServerConfigurerAdapter {
 
 	@Autowired
-	private AuthServerProperties authServerProperties;
+	private OAuth2ServerProperties authServerProperties;
 
 	@Autowired
 	private AuthenticationManager authenticationManager;

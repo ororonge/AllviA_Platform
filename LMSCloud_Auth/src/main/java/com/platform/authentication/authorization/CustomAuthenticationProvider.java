@@ -8,13 +8,9 @@ import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.platform.authentication.model.ManagementLoginDTO;
-import com.platform.authentication.token.RedisTokenUtil;
 
 @Component
 public class CustomAuthenticationProvider implements AuthenticationProvider {
@@ -24,9 +20,6 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 	
     @Autowired
     private CustomPasswordEncoder encoder;
-    
-    @Autowired
-    private RedisTokenUtil redisTokenUtil;
     
 	@Override
 	public Authentication authenticate(Authentication authentication) throws AuthenticationException {
@@ -41,9 +34,6 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 		if (StringUtils.equals(member.getUserLoginNotAllowYn(), "Y")) {
 			throw new DisabledException(member_username);
 		}
-        
-//		String token = redisTokenUtil.authorization(member);
-//		member.setJwtToken(token);
 		
 		// 스프링 시큐리티 내부 클래스로 인증 토큰 생성
 //		CustomBearerTokenAuthenticationToken result = new CustomBearerTokenAuthenticationToken(token);
