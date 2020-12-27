@@ -22,15 +22,15 @@ zuul:
   routes: 
     api-main:
       strip-prefix: false
-      path: /lms/**
+      path: /**
       service-id: api-main
     web-main:
       strip-prefix: false
-      path: /lms/**
+      path: /**
       service-id: web-main
     auth-main:
       strip-prefix: false
-      path: /auth/**
+      path: /**
       service-id: authenticationservice 
 mybatis: 
   configuration: 

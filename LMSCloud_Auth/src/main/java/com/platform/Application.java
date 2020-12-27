@@ -22,6 +22,7 @@ import com.platform.authentication.security.OAuth2ServerProperties;
 @EnableResourceServer
 @EnableAuthorizationServer
 @EnableConfigurationProperties(OAuth2ServerProperties.class)
+//java -jar -DPORT=8761 -Dspring.profiles.active=real -XX:MaxPermSize=128m -Xms256m -Xmx512m "C:/Users/samsung/git/repository/LMSCloud_Eureka/build/libs/LMSCloud_Eureka_0.0.1-SNAPSHOT.jar"
 //curl -u head-admin:allvia-seckey-v0.0.1-head-admin http://localhost:8480/auth/oauth/token -d "grant_type=password&scope=webclient&username=testadmin&password=q12345"
 public class Application {
     @RequestMapping(value = { "/user" }, produces = "application/json")

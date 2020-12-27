@@ -16,8 +16,8 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.R
 import org.springframework.security.oauth2.config.annotation.web.configurers.ResourceServerSecurityConfigurer;
 import org.springframework.security.web.AuthenticationEntryPoint;
 
-@Configuration
-@EnableResourceServer
+//@Configuration
+//@EnableResourceServer
 public class ResourceServerConfiguration implements ResourceServerConfigurer {
 
 	@Value("${aplication.name:web-main}")
